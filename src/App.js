@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class ContactList extends Component {
   render(){
-    const people = [
+    const contacts = [
       {name: "Sheryl"},
       {name: "Michael"},
       {name: "Jess"},
@@ -11,7 +11,9 @@ class ContactList extends Component {
 
     return (
       <ol>
-        {people.map( person => <li key={person.name}>{person.name}</li> )}
+        {contacts.map( contact => (
+          <li key={contact.name}>{contact.name}</li>
+          ))}
       </ol>
       );
   };
@@ -27,6 +29,7 @@ class App extends Component {
         <p className="App-intro">
          <i>This is 'ContactList' - My First React Component:</i>
         </p>
+        <ContactList />
         <ContactList />
       </div>
     );
