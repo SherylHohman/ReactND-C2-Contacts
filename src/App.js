@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 
 class ContactList extends Component {
   render(){
-    const contacts = [
-      {name: "Sheryl"},
-      {name: "Michael"},
-      {name: "Jess"},
-      {name: "Clint Kerr"}
-    ];
+    const contacts = this.props.contacts;
 
     return (
       <ol>
@@ -27,10 +22,20 @@ class App extends Component {
           <h1 className="App-title">Contacts App</h1>
         </header>
         <p className="App-intro">
-         <i>This is 'ContactList' - My First React Component:</i>
+         <i>Reusable 'ContactList' Component with different 'contracts' prop passed in</i>
         </p>
-        <ContactList />
-        <ContactList />
+        <ContactList contacts={[
+          {name: "Sheryl"},
+          {name: "Michael"},
+          {name: "Jess"},
+          {name: "Clint Kerr"}
+        ]}/>
+        <ContactList contacts={[
+          {name: "Hartman Products"},
+          {name: "The Plastic Molding Shop"},
+          {name: "WhiteCap Supply"},
+          {name: "LAWLA at LAX"}
+        ]}/>
       </div>
     );
   }
