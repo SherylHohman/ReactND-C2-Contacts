@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ListContacts from "./ListContacts.js";
 
 // Temp contacts list, until we learn how to make network requests, using:
 // - src/utils/ContactsAPI.js, our preconfigured contacts API
@@ -28,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        Hello World
+        <ListContacts contacts={contacts}/>
      </div>
     );
   }
