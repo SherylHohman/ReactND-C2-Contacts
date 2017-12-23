@@ -5,7 +5,9 @@ class ListContacts extends Component {
     return (
         <ol className='contact-list'>
           {this.props.contacts.map((contact) => (
-              <li key={contact.id}>{contact.name}</li>
+            <li key={contact.id} className='contact-list-item'>
+              {contact.name}
+            </li>
           ))}
         </ol>
       );
