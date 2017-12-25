@@ -17,7 +17,10 @@ const ListContacts = (props) => (
               <p>{contact.name}</p>
               <p>{contact.email}</p>
             </div>
-            <button className='contact-remove'>
+            {/* invoke onDeleteContact (App.removeContact) whenever this button is clicked on*/}
+            {/* odd syntax for defining the arrow function that onClick invokes. ()=>fn_name()  */}
+            {/* Lesson3 Module 5: Updating State with setState */}
+            <button onClick={()=>props.onDeleteContact(contact)} className='contact-remove'>
               Remove
             </button>
           </li>
