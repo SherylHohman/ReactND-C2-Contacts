@@ -41,6 +41,10 @@ class ListContacts extends Component {
 
   // INPUT field's value will be set to whatever value is stored in state's query property.
 
+  clearQuery = () => {
+    this.setState( {query: ''} );
+  }
+
   render() {
 
     //  L3 Module 7: Controlled Components, vid
@@ -114,12 +118,13 @@ class ListContacts extends Component {
         {/* Conditional JSX Rendering */}
         {/* L3 Module 7: Controlled Component, vid 5: Showing Contacts Count */ }
         {/* Indicate number of filtered contacts out of total*/}
-        <div className='showing-contacts'>
         {filteredContacts.length !== contacts.length && (
-          <p>Showing {filteredContacts.length} of {contacts.length} total contacts. </p>
+          <div className='showing-contacts'>
+            <p>Showing {filteredContacts.length} of {contacts.length} total contacts.</p>
+            <button onClick={()=>this.clearQuery()}>Show All Contacts</button>
+          </div>
           )
         }
-        </div>
 
 
         {/* List of Contacts */}
