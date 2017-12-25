@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import escapeStringRegexp from 'escape-string-regexp';
+import sortBy from 'sort-by'
 
 class ListContacts extends Component {
 
@@ -40,6 +42,27 @@ class ListContacts extends Component {
   // INPUT field's value will be set to whatever value is stored in state's query property.
 
   render() {
+    // L3, Module 7: Controlled Components
+    // FILTER CONTACTS BASED ON (query) SEARCH STRING
+    // holds the list of contacts passing Search Query filter
+    let filteredContacts;
+    // '' is falsy, anything else is truthy
+    if (this.state.query) {
+      // create new regex object, escape user's query string, 'i' flag for case insensitive
+      const queryRegex = new RegExp(escapeStringRegexp(this.state.query), 'i');
+      // regexExpression.test(myString) returns true
+      //   if myString matches regexExpression
+      // use that as the boolean check for FILTERing our this.props contacts array
+      // rem ES6 syntax for FILTER: myArray.filter( (element) => booleanTest );
+      filteredContacts = this.props.contacts
+                        .filter( (contact) => queryRegex.test(contact.name) );
+    } else {
+      // show all contacts
+      filteredContacts = this.props.contacts;
+    }
+
+
+    // UI
     return (
       // wrapper div for component's UI render method: Search field, List of Contacts
       <div className='list-contacts'>
@@ -81,8 +104,12 @@ class ListContacts extends Component {
 
         {/* List of Contacts */}
         <ol className='contact-list'>
-
-          {this.props.contacts.map((contact) => (
+          {/* L3 Module 7: Controlled Components - filter on query string
+              we no longer want to map over the full contacts list,
+              we want to map over our filtered list of contacts
+          */}
+          {/* {this.props.contacts.map((contact) => ( */}
+          {filteredContacts.map((contact) => (
             <li key={contact.id} className='contact-list-item'>
 
               <div className='contact-avatar' style={{
