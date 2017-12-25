@@ -50,9 +50,6 @@ class ListContacts extends Component {
     //    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
     const {contacts, onDeleteContact} = this.props;
     const {query} = this.state;
-    // temp for testing
-    console.log(query, contacts[0].name);
-
 
     // L3, Module 7: Controlled Components
     // FILTER CONTACTS BASED ON (query) SEARCH STRING
@@ -114,9 +111,6 @@ class ListContacts extends Component {
                 JS eventHandlers or EventListners (not sure of proper terminology) */}
         </div>
 
-        {/* temp: display query string here so we can see UI change as a result of updateQuery's setState triggered by Input Field's onChange event */}
-        <p>state object: {JSON.stringify(this.state)}</p>
-        <p>query string: {this.state.query}</p>
 
         {/* List of Contacts */}
         <ol className='contact-list'>
