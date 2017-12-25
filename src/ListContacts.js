@@ -41,21 +41,43 @@ class ListContacts extends Component {
 
   render() {
     return (
-      {/* wrapper div to contain Search field, and the List of Contacts*/}
-      <div className='list-contacts'>  {/* wrapper for component UI */}
+      // wrapper div for component's UI render method: Search field, List of Contacts
+      <div className='list-contacts'>
 
-        {/* Search Form */}
-        <div className='list-contacts-top'> {/* wrapper for our Search form */}
+        {/* Search Form wrapper*/}
+        <div className='list-contacts-top'>
           <input
             className='search-contacts'
             type='text'
             placeholder='Search contacts'
-            value={}
-            onChange={}
-            {/* onInput() is an JS Event Object that gets fired when an <input> or <textarea> HTML element changes, due to user typing..  */}
-            {/* onChange() is an JS Event Object that gets fired  when an <input> or <textarea> or <select> HTML element LOOSES FOCUS (and was changed?) */}
+            value={this.state.query}
+            onChange={ (event) => {this.updateQuery(event.target.value)}}
           />
+            { /* value attribute's value
+                 ..puts state's query property to input field's value */ }
+            { /* onChange attribute's value
+                .. binds updateQuery method to this search form's input field */ }
+
+            {/* when JS detects new user input, fire updateQuery
+                to change query's state,
+                which will trigger UI re-render, and
+                update the input field's value to the new value of the
+                  state's query property */}
+
+            {/* onInput() is an JS Event Object that gets fired when
+                an <input> or <textarea> HTML element changes, due to user typing..  */}
+            {/* onChange() is an JS Event Object that gets fired  when
+                an <input> or <textarea> or <select> HTML element LOOSES FOCUS
+               (and was changed?) */}
+            {/* https://www.w3schools.com/jsref/event_oninput.asp */}
+
+            {/* event and event.target.value are come from those
+                JS eventHandlers or EventListners (not sure of proper terminology) */}
         </div>
+
+        {/* temp: display query string here so we can see UI change as a result of updateQuery's setState triggered by Input Field's onChange event */}
+        <p>state object: {JSON.stringify(this.state)}</p>
+        <p>query string: {this.state.query}</p>
 
         {/* List of Contacts */}
         <ol className='contact-list'>
