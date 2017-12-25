@@ -81,7 +81,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ListContacts contacts={this.state.contacts}/>
+        <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts}/>
      </div>
     );
   }
@@ -110,6 +110,9 @@ export default App;
   // it does this with the pattern of passing in a function which takes in state, and MODIFIES state.
   // it returns a new state variable with a new value for contacts
   // its new value is the original array of contacts, MINUS the contact that had the contact.id of the clicked on contact.
+  // this new state variable is MERGED with the Previous value of the state variable (automatically by react).  This distinction of MERGING old state{} object with new state{} object is probably so we only need to include code for the parts were CHANGING, not list the current value of ALL (key/value pairs of) variables that are part of the defined state Object.
+
+  // this removeContact method must be passed to ListContacts via props
 
   // How does it know what contact that is?
     //  
