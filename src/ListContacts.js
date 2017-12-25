@@ -61,6 +61,10 @@ class ListContacts extends Component {
       filteredContacts = this.props.contacts;
     }
 
+    // now sort that filteredContacts list alphabetically by name
+    //   uses JS sort method, passing in the imported sortBy function
+    filteredContacts = filteredContacts.sort(sortBy('name'));
+
 
     // UI
     return (
