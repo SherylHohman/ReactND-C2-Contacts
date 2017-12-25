@@ -52,7 +52,7 @@ class App extends Component {
       contacts: prevState.contacts.filter((contacts_old) => (
         // filter function is also being passed in a function hence the (()=>()) syntax
         // remove the contact that was clicked on
-        contacts_old.id != contact.id
+        contacts_old.id !== contact.id
         // NO ; at the end of above line, its an Object (a , would be used if there was another key/value pair)
         // filter out the former contact that has an id of the contact which was clicked on (this contact is passed back to us from ListContacts OnClick function via "contact" that's passed into our removeContact function)
       ))
@@ -62,7 +62,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts}/>
+        <ListContacts
+          onDeleteContact={this.removeContact}
+          contacts={this.state.contacts}
+        />
      </div>
     );
   }
