@@ -8,8 +8,34 @@ class ListContacts extends Component {
   static propTypes = {
     contacts: PropTypes.array.isRequired,
     onDeleteContact: PropTypes.func.isRequired
-  };
+  }
 
+  // add state Object.  query "key" holds input string for filtering contacts list
+  state = {
+    query: ''
+  }
+
+  // updateQuery method will be "bound" to the Search FORM's INPUT field
+  //   to become a CONTROLLED COMPONENT
+  // updateQuery method will be used to update state={query: ..} once bound to
+  //   JavaScript's Input Field's onChange() event is fired.
+  updateQuery = (query) =>  {
+    this.setState( {query: query.trim()} );
+  }
+  // equivalent ES5 syntax:
+  //   updateQuery(query) {
+  //     return this.setState( {query: query.trim()} );
+  //   }
+
+  // new state does not depend on old state, so
+  // we simply pass its new value into setState
+  //   it's an object containing the new value of the (query) state variable
+  // trim() is used to remove any whitespace surrounding the user's input
+
+  // I don't quite understand the syntax:
+  //               methodName = (param) => {...}
+  // equivalent to:
+  //               methodName(param) {return ...}
 
   render() {
     return (
