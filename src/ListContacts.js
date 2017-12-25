@@ -37,33 +37,53 @@ class ListContacts extends Component {
   // equivalent to:
   //               methodName(param) {return ...}
 
+  // INPUT field's value will be set to whatever value is stored in state's query property.
+
   render() {
     return (
-      <ol className='contact-list'>
+      {/* wrapper div to contain Search field, and the List of Contacts*/}
+      <div className='list-contacts'>  {/* wrapper for component UI */}
 
-        {this.props.contacts.map((contact) => (
-          <li key={contact.id} className='contact-list-item'>
+        {/* Search Form */}
+        <div className='list-contacts-top'> {/* wrapper for our Search form */}
+          <input
+            className='search-contacts'
+            type='text'
+            placeholder='Search contacts'
+            value={}
+            onChange={}
+            {/* onInput() is an JS Event Object that gets fired when an <input> or <textarea> HTML element changes, due to user typing..  */}
+            {/* onChange() is an JS Event Object that gets fired  when an <input> or <textarea> or <select> HTML element LOOSES FOCUS (and was changed?) */}
+          />
+        </div>
 
-            <div className='contact-avatar' style={{
-              backgroundImage: `url(${contact.avatarURL})`
-            }}/>
+        {/* List of Contacts */}
+        <ol className='contact-list'>
 
-            <div className='contact-details'>
-              <p>{contact.name}</p>
-              <p>{contact.email}</p>
-            </div>
+          {this.props.contacts.map((contact) => (
+            <li key={contact.id} className='contact-list-item'>
 
-            {/* invoke onDeleteContact (App.removeContact) whenever this button is clicked on*/}
-            {/* odd syntax for defining the arrow function that onClick invokes. ()=>fn_name()  */}
-            {/* Lesson3 Module 5: Updating State with setState */}
-            <button onClick={()=>this.props.onDeleteContact(contact)} className='contact-remove'>
-              Remove
-            </button>
+              <div className='contact-avatar' style={{
+                backgroundImage: `url(${contact.avatarURL})`
+              }}/>
 
-          </li>
-        ))}
+              <div className='contact-details'>
+                <p>{contact.name}</p>
+                <p>{contact.email}</p>
+              </div>
 
-      </ol>
+              {/* invoke onDeleteContact (App.removeContact) whenever this button is clicked on*/}
+              {/* odd syntax for defining the arrow function that onClick invokes. ()=>fn_name()  */}
+              {/* Lesson3 Module 5: Updating State with setState */}
+              <button onClick={()=>this.props.onDeleteContact(contact)} className='contact-remove'>
+                Remove
+              </button>
+
+            </li>
+          ))}
+
+        </ol>
+      </div>
     );
   }}
 
