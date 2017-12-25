@@ -111,6 +111,16 @@ class ListContacts extends Component {
                 JS eventHandlers or EventListners (not sure of proper terminology) */}
         </div>
 
+        {/* Conditional JSX Rendering */}
+        {/* L3 Module 7: Controlled Component, vid 5: Showing Contacts Count */ }
+        {/* Indicate number of filtered contacts out of total*/}
+        <div className='showing-contacts'>
+        {filteredContacts.length !== contacts.length && (
+          <p>Showing {filteredContacts.length} of {contacts.length} total contacts. </p>
+          )
+        }
+        </div>
+
 
         {/* List of Contacts */}
         <ol className='contact-list'>
