@@ -64,11 +64,11 @@ class App extends Component {
     // this.setState();             the bar function call
     // this.setState( () => () );   .. that's passed in a function
     // this.setState( () => ({}) ); .. that returns an object
-    this.setState( (state) => ({
+    this.setState( (prevState) => ({
       // contacts is now a OBJECT on state.
       // We set "contacts: ..." to a new (array) as defined below (ie minus current contact)
       // state is the variable passed in.  Don't use this.state.contacts
-      contacts: state.contacts.filter((contacts_old) => (
+      contacts: prevState.contacts.filter((contacts_old) => (
         // filter function is also being passed in a function hence the (()=>()) syntax
         // remove the contact that was clicked on
         contacts_old.id != contact.id
