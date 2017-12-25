@@ -5,30 +5,10 @@ import ListContacts from "./ListContacts.js";
 // - src/utils/ContactsAPI.js, our preconfigured contacts API
 // - with our preconfigured Backend Server
 
-// Lesson 3, Module 4: Managing State
+// L3, Module 4: Managing State
 // Let App manage state of contacts list (so can delete and add new)
 //   by moving it inside App Component, as a field in its 'state' "field variable"
 
-// const contacts = [
-//   {
-//     "id": "ryan",
-//     "name": "Ryan Florence",
-//     "email": "ryan@reacttraining.com",
-//     "avatarURL": "http://localhost:5001/ryan.jpg"
-//   },
-//   {
-//     "id": "michael",
-//     "name": "Michael Jackson",
-//     "email": "michael@reacttraining.com",
-//     "avatarURL": "http://localhost:5001/michael.jpg"
-//   },
-//   {
-//     "id": "tyler",
-//     "name": "Tyler McGinnis",
-//     "email": "tyler@reacttraining.com",
-//     "avatarURL": "http://localhost:5001/tyler.jpg"
-//   }
-// ]
 
 class App extends Component {
 
@@ -57,7 +37,7 @@ class App extends Component {
 
   }
 
-  // Lesson 3, Module 5: "Update State with SetState"
+  // L3, Module 5: "Update State with SetState"
   removeContact = (contact) => {
     // takes in (the) contact that was clicked on (we'll access contact.id)
     // pass it a function.. that returns an object. See below for how syntax for this evolves
@@ -68,6 +48,7 @@ class App extends Component {
       // contacts is now a OBJECT on state.
       // We set "contacts: ..." to a new (array) as defined below (ie minus current contact)
       // state is the variable passed in.  Don't use this.state.contacts
+      // updated the var passed in to "prevState", to make this point clearer.
       contacts: prevState.contacts.filter((contacts_old) => (
         // filter function is also being passed in a function hence the (()=>()) syntax
         // remove the contact that was clicked on
@@ -90,7 +71,7 @@ class App extends Component {
 export default App;
 
 
-// Notes for Lesson 3, Module 4: Add State to a Component
+// Notes for L3, Module 4: Add State to a Component
   // contacts array is now a "state" variable of the App Component
   // App is now a Component with state instead of a Stateless Component.
   // data that is passed to child components should be encapsulated by that component.  Previously, it was just a random variable inside App.js, but not owned by anyone.
@@ -104,7 +85,7 @@ export default App;
     //          contacts : [
     // within the state = {} object
 
-// Notes for Lesson 3, Module 5: Update state with setState
+// Notes for L3, Module 5: Update state with setState
   //  App component owns the contacts array
   //  create a method. removeContact, on App that modifies the contact array
   // it does this with the pattern of passing in a function which takes in state, and MODIFIES state.
@@ -114,6 +95,12 @@ export default App;
 
   // this removeContact method must be passed to ListContacts via props
 
-  // How does it know what contact that is?
-    //  
+  // How does it know which contact that is?
+    //  we pass removeContact() method as a prop to ListContacts Component
+    // we reference this method within ListContacts as onDeleteContact() (chosen since it's triggered by an onclick handler)
+    // we add an onClick handler to our (delete) button within that li
+    // that li references the contact that's been clicked on for deletion
+    // this contact is passed into App.removeContact(contact)
+    // which then calls setstate...
+
 

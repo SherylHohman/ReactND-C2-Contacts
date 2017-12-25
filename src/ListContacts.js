@@ -1,4 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
+
+// import React, { Component } from 'react';
+// we don't need to import {Component},
+// now that we've refatored to use a Functional Stateless Component
 
 // COMPARE traditional ES5 function syntax... to ES6 Arrow Function Syntax..
 
