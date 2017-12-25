@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 // import React, { Component } from 'react';
 // we don't need to import {Component},
@@ -32,6 +33,15 @@ const ListContacts = (props) => (
       </ol>
     );
   // };
+
+// add a PROPERTY, propTypes, to our stateless Functional Component
+// note that:
+// - the component's Property has a lower-case p
+// - the class PropTypes (we imported) has an Upper-case P
+ListContacts.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  onDeleteContact: PropTypes.func.isRequired
+};
 
 // traditional ES5 function syntax...
 
