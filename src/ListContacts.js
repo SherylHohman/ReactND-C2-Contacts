@@ -42,23 +42,35 @@ class ListContacts extends Component {
   // INPUT field's value will be set to whatever value is stored in state's query property.
 
   render() {
+
+    //  L3 Module 7: Controlled Components, vid
+    //  local variables convenience variables to simply code
+    //    using ES6 Object Destructuring syntax,
+    //    ..or UnPacking the properties into variables/constants
+    //    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+    const {contacts, onDeleteContact} = this.props;
+    const {query} = this.state;
+    // temp for testing
+    console.log(query, contacts[0].name);
+
+
     // L3, Module 7: Controlled Components
     // FILTER CONTACTS BASED ON (query) SEARCH STRING
     // holds the list of contacts passing Search Query filter
     let filteredContacts;
     // '' is falsy, anything else is truthy
-    if (this.state.query) {
+    if (query) {
       // create new regex object, escape user's query string, 'i' flag for case insensitive
-      const queryRegex = new RegExp(escapeStringRegexp(this.state.query), 'i');
+      const queryRegex = new RegExp(escapeStringRegexp(query), 'i');
       // regexExpression.test(myString) returns true
       //   if myString matches regexExpression
       // use that as the boolean check for FILTERing our this.props contacts array
       // rem ES6 syntax for FILTER: myArray.filter( (element) => booleanTest );
-      filteredContacts = this.props.contacts
+      filteredContacts = contacts
                         .filter( (contact) => queryRegex.test(contact.name) );
     } else {
       // show all contacts
-      filteredContacts = this.props.contacts;
+      filteredContacts = contacts;
     }
 
     // now sort that filteredContacts list alphabetically by name
@@ -128,7 +140,7 @@ class ListContacts extends Component {
               {/* invoke onDeleteContact (App.removeContact) whenever this button is clicked on*/}
               {/* odd syntax for defining the arrow function that onClick invokes. ()=>fn_name()  */}
               {/* Lesson3 Module 5: Updating State with setState */}
-              <button onClick={()=>this.props.onDeleteContact(contact)} className='contact-remove'>
+              <button onClick={()=>onDeleteContact(contact)} className='contact-remove'>
                 Remove
               </button>
 
