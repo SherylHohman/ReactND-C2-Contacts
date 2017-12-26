@@ -46,3 +46,35 @@ This is called a `class field`.
 
 Basically, `state` are variables that we want a specific React Component to manage, as these variables represent (changing) data that the Component will be rendering to the UI/screen.
 
+
+...
+
+
+#### React LifeCycle Events
+##### Adding to the DOM
+These lifecycle events are called when a component is being added to the DOM:
+
+**Mount** means **Render**
+" componentWillMount is called *after* it's been *rendered* to the DOM"
+**Ajax Requests** go in **componentWillMount()**
+
+constructor()
+componentWillMount()    **Ajax Requests**
+render()
+componentDidMount()
+
+##### Re-rendering
+These lifecycle events are called when a component is re-rendered to the DOM
+
+componentWillReceiveProps()
+shouldComponentUpdate()
+componentWillUpdate()
+render()
+componentDidUpdate()
+
+##### Removing from the DOM
+This lifecycle event is called when a component is being removed from the DOM
+
+componentWillUnmount()
+
+
