@@ -10,14 +10,13 @@ class ListContacts extends Component {
     onDeleteContact: PropTypes.func.isRequired
   }
 
-  // query property holds user's Search Bar <input> string.. to filter contacts list
+  // Search Bar <input> string.. to filter contacts list
   state = {
     query: ''
   }
 
-  // updateQuery method will be used to update state={query: '...'}, when bound to
-  //   Search FORM's <INPUT>, thereby turning (<input>) into a CONTROLLED COMPONENT
-  //   Set updateQuery to JavaScript's input/textarea/select's onChange() event
+  // bound to Search Bar through <input>'s' onChange() event,
+  //   turning (<input>) into a CONTROLLED COMPONENT
   updateQuery = (query) =>  {
     this.setState( {query: query.trim()} );
   }
@@ -27,7 +26,6 @@ class ListContacts extends Component {
   }
 
   render() {
-
     //  local convenience variables; via ES6 Object Destructuring syntax
     const {contacts, onDeleteContact} = this.props;
     const {query} = this.state;

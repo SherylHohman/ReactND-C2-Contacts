@@ -5,23 +5,11 @@ import * as ContactsAPI from "./utils/ContactsAPI.js";
 class App extends Component {
 
   state = {
-    // contacts will now be fetched from DB via ContactsAPI
-    // L4 Module2: ComponentDidMountLifecycleEvent
     contacts : []
   }
 
   componentDidMount() {
-
-    //componentDidMount() gets called after the
-    // component is rendered AKA "mounted"
-
-    // getAll returns a Promise, so call .then on it.
-    // the .then function is going to be invoked with our contacts
-    //  (see API - it gives us data.contacts from the AJAX call)
-    // now out .then function will call setState, giving it our contacts property
-    // NOTE ES6 syntax: { contaacts }
-    // is equivalent to { contacts: contacts}
-
+    // fetch our contacts array from our backend DB
     ContactsAPI.getAll().then((contacts) => {
       this.setState({ contacts }) ;          // ES6 syntax
    // this.setState({ contacts: contacts});  // ES5 syntax
@@ -35,7 +23,7 @@ class App extends Component {
       ))
     }) );
 
-    // now, remove the deleted contact from backend database, using API
+    // now, delete the removed contact from backend database, using API
     ContactsAPI.remove(contact);
   }
 
