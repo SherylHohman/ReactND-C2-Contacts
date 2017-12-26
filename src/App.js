@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ListContacts from "./ListContacts.js";
-import * as ContactsAPI from "./utils/ContactsAPI.js";
+import ListContacts from './ListContacts';
+import * as ContactsAPI from './utils/ContactsAPI';
 
 class App extends Component {
 
