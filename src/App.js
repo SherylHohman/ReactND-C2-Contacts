@@ -11,6 +11,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+
+    //componentDidMount() gets called after the
+    // component is rendered AKA "mounted"
+
     // getAll returns a Promise, so call .then on it.
     // the .then function is going to be invoked with our contacts
     //  (see API - it gives us data.contacts from the AJAX call)
@@ -19,8 +23,8 @@ class App extends Component {
     // is equivalent to { contacts: contacts}
 
     ContactsAPI.getAll().then((contacts) => {
-      this.setState({ contacts }) ;         // ES6 syntax
-  // this.setState({ contacts: contacts});  // ES5 syntax
+      this.setState({ contacts }) ;          // ES6 syntax
+   // this.setState({ contacts: contacts});  // ES5 syntax
     })
   }
 
@@ -28,12 +32,11 @@ class App extends Component {
     this.setState( (prevState) => ({
       contacts: prevState.contacts.filter((contacts_old) => (
         contacts_old.id !== contact.id
-        // NO ; at the end of above line -- its a property on an Object, not a var
-        // Filter out the contact that has an id of the contact which was clicked on
-        //   (this contact is passed back to us from ListContacts OnClick function
-        //   via "contact" that's passed into our removeContact function)
       ))
     }) );
+
+    // now, remove the deleted contact from backend database, using API
+    ContactsAPI.remove(contact);
   }
 
   render() {
