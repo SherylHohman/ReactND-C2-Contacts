@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import escapeStringRegexp from 'escape-string-regexp';
 import sortBy from 'sort-by';
@@ -53,7 +54,7 @@ class ListContacts extends Component {
       // wrapper div for component's UI render method: Search Bar, Contacts List
       <div className='list-contacts'>
 
-        {/* Search Form wrapper*/}
+        {/* wrapper for: Search Form, Add Contact Link */}
         <div className='list-contacts-top'>
           {/* Search Bar */}
           <input
@@ -69,11 +70,21 @@ class ListContacts extends Component {
                 but NOT a BUTTON <button>?! Supposed to have <a> tag here..
                 See Notes at bottom of file.
           */}
-          <button
+
+          {/* Replace `<a>`` tag (Ok, I had a <button> - it was supposed to be an `<a>`)
+                with React Router's `<Link>`` component
+                - `href` attribute is replaced by `to` property
+                - `onClick` no longer needed, as React Router takes care of STATE!
+              L5_ReactRouter 4. The Link Component, vid-2
+          */}
+          {/* Add Contact Link */}
+          <Link
             className="add-contact"
-            href="/create-contact"
-            onClick={this.props.onAddContact}
-          >Add Contact</button>
+            to="/create-contact"
+          >Add Contact</Link>
+          {/* Note that while address bar Does Update, the Page
+                doesn't YET change, as we have more to do to hook that up
+          */}
          </div>
 
         {/* Conditional JSX Rendering: filtered Contacts Count*/}
