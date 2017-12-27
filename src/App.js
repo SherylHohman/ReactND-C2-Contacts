@@ -6,7 +6,14 @@ import * as ContactsAPI from './utils/ContactsAPI';
 class App extends Component {
 
   state = {
-    contacts : []
+    contacts : [],
+    // Temp for Understanding: use 'state' to store which screen the user should see
+    //   we manually hard code the value in the code for now..
+    //   App Component will use conditional rendering based on this value
+    //     to decide which "page" or component gets rendered.
+    //   valid values: 'Create Contact Page', or 'List Contacts Page'
+    // screenToShow: 'List Contacts Page'
+    screenToShow: 'Create Contact Page'
   }
 
   componentDidMount() {
@@ -28,18 +35,39 @@ class App extends Component {
     ContactsAPI.remove(contact);
   }
 
+  switchScreenToShow = () => {
+    const validScreens = ['List Contacts Page', 'Create Contact Page'];
+    let newScreen = 'List Contacts Page';  // default value in case of invalid state
+      if (this.state.screenToShow === validScreens[0]) {
+        newScreen = validScreens[1]
+      }
+      else {
+        newScreen = validScreens[0]
+      };
+    this.setState({screenToShow: newScreen})
+  };
+
   render() {
     return (
       <div>
-        <ListContacts
-          onDeleteContact={this.removeContact}
-          contacts={this.state.contacts}
-        />
-        <CreateContact />
+
+        {/* conditionally render "page" based on state*/}
+        {this.state.screenToShow==='List Contacts Page' && (
+          <ListContacts
+            onDeleteContact={this.removeContact}
+            contacts={this.state.contacts}
+          />
+        )}
+        {this.state.screenToShow==='Create Contact Page' && (
+          <CreateContact />
+        )}
+
+        {/* button to auto swap which "page" user sees*/}
+        <button onClick={()=>this.switchScreenToShow()}>Switch Pages</button>
+
      </div>
     );
   }
 }
 
 export default App;
-
