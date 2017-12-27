@@ -7,13 +7,9 @@ class App extends Component {
 
   state = {
     contacts : [],
-    // Temp for Understanding: use 'state' to store which screen the user should see
-    //   we manually hard code the value in the code for now..
-    //   App Component will use conditional rendering based on this value
-    //     to decide which "page" or component gets rendered.
-    //   valid values: 'Create Contact Page', or 'List Contacts Page'
-    // screenToShow: 'List Contacts Page'
-    screenToShow: 'Create Contact Page'
+    // Temp: use 'state' to conditional rendering a page of a Single Page App (SPA)
+    // See switchScreenToShow() for valid values:
+    screenToShow: 'List Contacts Page'
   }
 
   componentDidMount() {
@@ -31,19 +27,18 @@ class App extends Component {
       ))
     }) );
 
-    // now, delete the removed contact from backend database, using API
+    // .. and delete this removed contact from backend database, using API
     ContactsAPI.remove(contact);
   }
 
   switchScreenToShow = () => {
     const validScreens = ['List Contacts Page', 'Create Contact Page'];
-    let newScreen = 'List Contacts Page';  // default value in case of invalid state
-      if (this.state.screenToShow === validScreens[0]) {
-        newScreen = validScreens[1]
-      }
-      else {
-        newScreen = validScreens[0]
-      };
+    const curIndex = validScreens.indexOf(this.state.screenToShow);
+    // notice: if curIndex == -1, validScreens[0] will become the new page
+
+    // cycle through all validScreens in order listed
+    const newIndex = (curIndex + 1) % validScreens.length;
+    const newScreen = validScreens[newIndex];
     this.setState({screenToShow: newScreen})
   };
 
