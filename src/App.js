@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import ListContacts from './ListContacts';
 import CreateContact from './CreateContact';
 import * as ContactsAPI from './utils/ContactsAPI';
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   switchScreenToShow = () => {
-    const validScreens = ['List Contacts Page', 'Create Contact Page'];
+    const validScreens = ['List Contacts Page', 'Create Contact Page', 'create-contact'];
     const curIndex = validScreens.indexOf(this.state.screenToShow);
     // notice: if curIndex == -1, validScreens[0] will become the new page
 
@@ -39,6 +40,15 @@ class App extends Component {
     const newIndex = (curIndex + 1) % validScreens.length;
     const newScreen = validScreens[newIndex];
     this.setState({screenToShow: newScreen})
+    // added when implemented <Route>, so we can see that 'Switch Page'
+    //    *does* still change state.screenToShow, even though
+    //    screenToShow NO Longer Determines what page Components to Render.
+    //    .. that's controlled by the URL via Router, which now "owns" these
+    //      "child" components.  Note, <button> itself always renders, as it's
+    //      "IN" <App /> render method.  but
+    //      "OUTSIDE" all <App/>'s <Router> components
+    //  WE don't fmanually control the URL "state" <BrowserRouter> Does.
+    console.log(this.state.screenToShow);
   };
 
   render() {
@@ -51,6 +61,7 @@ class App extends Component {
             '  Add Contact Page', via link near its Search Bar
             (L5 2.DynamicallyRenderPages, video2)
         */}
+        {/* This gets replaced with the below Route
         {this.state.screenToShow==='List Contacts Page' && (
           <ListContacts
             onDeleteContact={this.removeContact}
@@ -60,12 +71,50 @@ class App extends Component {
             }}
           />
         )}
-        {this.state.screenToShow==='Create Contact Page' && (
-          <CreateContact />
-        )}
+        */}
 
-        {/* button to auto swap which "page" user sees*/}
+        <Route exact path="/" render={() => (
+          <ListContacts
+            onDeleteContact={this.removeContact}
+            contacts={this.state.contacts}
+          />
+        )} />
+
+        {/* Replace the following with Router to render the same */}
+        {/*
+          {this.state.screenToShow==='Create Contact Page' && (
+            <CreateContact />
+          )}
+        */}
+        <Route path="/create-contact"
+               component={CreateContact}
+        />
+
+        {/* NOTICE: Following onClick handler NO LONGER Works
+              as ROUTE, NOT state.screenToShow,
+              controlls what screens/components to RENDER
+            Not sure if I've got that *quite* right: as the BUTTON
+              correctly renders on both pages, as Expected..
+              BUT.. the onClick handler does NOT cause the screen to change.
+              .. well, yeah, the URL (which is NOT changed in my handler)
+                  is what triggers a re-render. *IT* is the single source of truth to determine what gets RENDERED. It is the equivalent of "STATE".  So, Yes, Button Renders.  But changing the state.screenToShow, does NOT control which ROUTE Components
+                  (and hence which "child?" Components (ListContacts vs CreateContact) is Rendered !)
+                In DevTools: React, click on <App> Component.
+                  Here we can see that state.screenToShow DOES change
+                    when "Switch Pages" is clicked on.
+                  When clicking on a Child Component of App, we do NOT see
+                    state.screenToShow, as that is NOT passed into any of
+                    App's child components
+                    In contrast, ListComponents does pass this.state.contacts,
+                      so it has an Props.contacts. And IT has state.query.
+              All Right, I think I *mainly* understand this.  Leave comments here for a little while, until it Fully sinks into gray matter, and fully becomes obvious to me.
+              Also.. until I can/know how to code a solution that performs the same function that this does.
+              Yes! - this functionality is NO longer NEEDED.  It's for Learning and Comphrehension purposes. So I can Viserally See how the code *would* translate.
+        */}
+        {/* button to auto swap which "page" user sees */}
         <button onClick={()=>this.switchScreenToShow()}>Switch Pages</button>
+        {/*
+        */}
 
      </div>
     );

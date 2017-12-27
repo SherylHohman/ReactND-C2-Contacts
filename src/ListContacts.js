@@ -77,14 +77,29 @@ class ListContacts extends Component {
                 - `onClick` no longer needed, as React Router takes care of STATE!
               L5_ReactRouter 4. The Link Component, vid-2
           */}
+
           {/* Add Contact Link */}
+          {/* replace <a> (Ok, <button>) with <Link>.* /}
+          <button
+            className="add-contact"
+            href="/create-contact"
+            onClick={this.props.onAddContact}
+          >Add Contact</button>
+          */}
           <Link
             className="add-contact"
             to="/create-contact"
           >Add Contact</Link>
-          {/* Note that while address bar Does Update, the Page
-                doesn't YET change, as we have more to do to hook that up
+          {/* We don't need an onClick handler anymore!
+            ..and "href" becomes "to"
           */}
+          {/* NOW that App is using ROUTE to render this Component,
+              - clicking on this component *DOES* cause the page to "change"
+              - "Back" keyboard button WORKS as EXPECTED !
+              Before hooking up <Route> in <App/>, the address bar changed,
+                but it didn't cause the CreateContacts Page to render.
+          */}
+
          </div>
 
         {/* Conditional JSX Rendering: filtered Contacts Count*/}
