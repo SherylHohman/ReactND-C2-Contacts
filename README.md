@@ -123,3 +123,45 @@ class BrowserRouter extends React.Component {
 }
 ```
 
+##### Link Component
+
+How the user navigates through the app, via clicking on LINKS.
+
+When a link is clicked, `<Link />` component talks to `<BrowserRouter>`, telling it to update the URL (browser address bar).
+
+It supports RIGHT CLICKING to open in tab, and keyboard navigation too !
+
+`<Link>` component compiles down to proper `<a>` anchor tags.
+`to` corresponds to the anchor tag's `href` attribute.
+
+To use:
+- replace anchor tags with Link Components:  
+- add a `to` property to `<Link>` Component with the desired `url`  
+  (ie `href`value)
+
+
+query string paramaters, and `state` can also be passed to the Linked "page", by providing an (?attriputes, paramaters ?) as an Object to the `to` paramater, as follows:  
+
+```
+<Link to={{
+  pathname: '/courses',
+  search: '?sort=name',
+  hash: '#the-hash',
+  state: { fromDashboard: true }
+}}>
+  Courses
+</Link>
+```
+
+React Router provides a Link component which allows you to add declarative, accessible navigation around your application. 
+> You'll use it in place of anchor tags (`a`) that you're typically used to. 
+
+React Router's <Link> component is a great way to make navigation through your app accessible for users. 
+Passing a to prop to your link, for example, helps guide your users to an absolute path (e.g., /about):
+
+`<Link to="/about">About</Link>`
+
+Since the `<Link>` component fully renders a proper anchor tag (`<a>`) with the appropriate `href`, you can expect it to behave how a normal link on the web behaves.  
+
+
+
