@@ -63,12 +63,34 @@ class ListContacts extends Component {
             onChange={ (event) => {this.updateQuery(event.target.value)}}
           />
           {/* "Create Contact" LINK to the right of search field */}
-          <a
+          {/* We're supposed to have an LINK: here NOT a BUTTON !
+              ie  "<a ...> Add Contact </a>""
+              NOT "<button...> Add Contact </button>"
+                BUT.. After BRIEFLY navigating to the 'Add Contact Page', it immediately re-navigates back to 'List Contacts Page' !!???!!!
+                No Clue WHY.
+                -- something with href RELOADING the page??
+                Spend MANY Hours trying to fix. (see branch L5_strange_nav..)
+              BUT.. changing this to a button WORKS
+                - Nav Works, BUT
+                - address Bar Does NOT change  (href is prob not a supported attribute for buttons)
+                - button is uglier (css prob could fix)
+              using <a> ..</a>
+                - Address Bar WORKS: changes to the indicated "href" string
+                - navigation gets funky (in the VIDEO, it did Not)
+                - css looks prettier, as intended
+              We'll be switching to React Router Soon anyway.
+          */}
+          <button
             className="add-contact"
             href="/create-contact"
-            onClick={() => {}}
-          >Add Contact</a>
+            onClick={this.props.onAddContact}
+          >Add Contact</button>
          </div>
+          {/* Neither work properly with <a>, both work with <button>
+                  onClick={() => {this.props.onAddContact()}}
+                  onClick={this.props.onAddContact}
+              EVEN IF I GET RID of My switchPages Button and method in App.js, this STILL doesn't work properly. Same Funky behaviour.
+          */}
 
         {/* Conditional JSX Rendering: filtered Contacts Count*/}
         {filteredContacts.length !== contacts.length && (

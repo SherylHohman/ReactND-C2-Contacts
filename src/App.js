@@ -47,10 +47,19 @@ class App extends Component {
       <div>
 
         {/* conditionally render "page" based on state*/}
+        {/* onAddContact PROP with inline func to so ListContacts can have
+            an "add Contact LINK" (next to SearchBar) that changes state and hence the viewable "page"
+            (L5 2.DynamicallyRenderPages, video2)
+        */}
         {this.state.screenToShow==='List Contacts Page' && (
           <ListContacts
             onDeleteContact={this.removeContact}
             contacts={this.state.contacts}
+            onAddContact={() => {
+              this.setState({
+                screenToShow: 'Create Contact Page'
+              });
+            }}
           />
         )}
         {this.state.screenToShow==='Create Contact Page' && (
