@@ -77,4 +77,49 @@ This lifecycle event is called when a component is being removed from the DOM
 
 componentWillUnmount()
 
+----
+#### React Router  
+
+##### install history and React Router DOM (vs native)
+react-router-dom
+
+
+##### BrowserRouter Component 
+It Listens for Changes in the URL (browser address bar)
+  and makes sure that the right screen shows up
+Allows Address Bar navigation to work as expected.
+
+All that needs to be done with BrowserRouter is to:   
+- import it into root of app (index.js)
+`import { BrowserRouter } from react-router-dom`
+- surround root Component of app (<App />) with <BrowserRouter></BrowserRouter>
+`<BrowserRouter><App /></BrowserRouter>`  
+
+That: 
+- sets up the file to be able to work with all the other (React-Router) Components that will be installed later. 
+- listens to the URL and Notifies the other React-Router Components when it changes. 
+- allows URL routing from browser/address bar to work as expected.
+
+It works by creating a `history` object. and returning a `<Router>` component with that `history` object as props.  This way every component has access to the browser's history.
+
+`history` object allows for management of: history stack, navigate, confirm navigation, and persist state between sessions, via its API.
+
+Some code straight from the React Router repository:
+```
+class BrowserRouter extends React.Component {
+  static propTypes = {
+    basename: PropTypes.string,
+    forceRefresh: PropTypes.bool,
+    getUserConfirmation: PropTypes.func,
+    keyLength: PropTypes.number,
+    children: PropTypes.node
+  }
+
+  history = createHistory(this.props)
+
+  render() {
+    return <Router history={this.history} children={this.props.children}  />
+  }
+}
+```
 
