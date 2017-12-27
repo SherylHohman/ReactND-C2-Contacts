@@ -7,7 +7,7 @@ class App extends Component {
 
   state = {
     contacts : [],
-    // Temp: use 'state' to conditional rendering a page of a Single Page App (SPA)
+    // Temp: use 'state' to conditionally render page of Single Page App
     // See switchScreenToShow() for valid values:
     screenToShow: 'List Contacts Page'
   }
@@ -26,7 +26,6 @@ class App extends Component {
         contacts_old.id !== contact.id
       ))
     }) );
-
     // .. and delete this removed contact from backend database, using API
     ContactsAPI.remove(contact);
   }
@@ -47,8 +46,9 @@ class App extends Component {
       <div>
 
         {/* conditionally render "page" based on state*/}
-        {/* onAddContact PROP with inline func to so ListContacts can have
-            an "add Contact LINK" (next to SearchBar) that changes state and hence the viewable "page"
+        {/* add PROP "onAddContact" (func defined inline), so
+              ListContacts can change state, hence navigate to
+            '  Add Contact Page', via link near its Search Bar
             (L5 2.DynamicallyRenderPages, video2)
         */}
         {this.state.screenToShow==='List Contacts Page' && (
@@ -56,9 +56,7 @@ class App extends Component {
             onDeleteContact={this.removeContact}
             contacts={this.state.contacts}
             onAddContact={() => {
-              this.setState({
-                screenToShow: 'Create Contact Page'
-              });
+              this.setState({screenToShow: 'Create Contact Page'});
             }}
           />
         )}
