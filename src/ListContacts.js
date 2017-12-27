@@ -54,6 +54,7 @@ class ListContacts extends Component {
 
         {/* Search Form wrapper*/}
         <div className='list-contacts-top'>
+          {/* Search Bar */}
           <input
             className='search-contacts'
             type='text'
@@ -61,6 +62,12 @@ class ListContacts extends Component {
             value={this.state.query}
             onChange={ (event) => {this.updateQuery(event.target.value)}}
           />
+          {/* "Create Contact" LINK to the right of search field */}
+          <a
+            className="add-contact"
+            href="/create-contact"
+            onClick={() => {}}
+          >Add Contact</a>
          </div>
 
         {/* Conditional JSX Rendering: filtered Contacts Count*/}
