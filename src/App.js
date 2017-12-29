@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import ListContacts from './ListContacts';
 import CreateContact from './CreateContact';
 import * as ContactsAPI from './utils/ContactsAPI';
@@ -112,7 +111,7 @@ class App extends Component {
           <CreateContact
             onCreateContact={(newContact) => {
               this.createContact(newContact);
-              // return to home page: newContact is now in the contacts lis 
+              // return to home page: newContact is now in the contacts lis
               history.push('/');
             }
           }/>

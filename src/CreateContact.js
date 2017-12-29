@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import ImageInput from './ImageInput';
 import serializeForm from 'form-serialize';
 
-// at this time it does nothing but render, so.. start with a
-//   a Functional Stateless Component
+// Functional Stateless Component:
+//  only uses render() method, and has no state
 
 const CreateContact = function(props) {
+
   const handleSubmit = (e) => {
     // don't let Browser take over handling of the <form>'s <input> data
     e.preventDefault();
@@ -38,5 +39,6 @@ const CreateContact = function(props) {
     </div>
   )
 };
+
 
 export default CreateContact;
