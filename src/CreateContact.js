@@ -3,16 +3,21 @@ import { Link } from 'react-router-dom';
 import ImageInput from './ImageInput';
 import serializeForm from 'form-serialize';
 
-// create dummy "create contact" "screen" ie component.
-// at this time it does nothing but renter, so.. start with a
+// at this time it does nothing but render, so.. start with a
 //   a Functional Stateless Component
 
 const CreateContact = function(props) {
-
   const handleSubmit = (e) => {
+    // don't let Browser take over handling of the <form>'s <input> data
     e.preventDefault();
+    // "serialize" the form data into an JS Object, so "we" can handle the processinf of this data
     const formData = serializeForm(e.target, {hash: true});
     console.log(formData);
+    // if this method was given to us via props from parent (App) component..
+    if (props.onCreateContact) {
+      // call this function, giving it our new contact's data to process (calls API..)
+      props.onCreateContact(formData);
+    }
   }
 
   return (

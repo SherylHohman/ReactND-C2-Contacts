@@ -22,6 +22,21 @@ class App extends Component {
     })
   }
 
+  createContact(contact) {
+    // send our serialized form data to the Server
+    //  using our API, storing it in DB
+    // contact comes from CreateContact onhandlesubmit, holds serialized form data
+    // response from API contains the new contact
+    // add the new contact to state.contacts (via concat)
+    ContactsAPI.create(contact).then(contact => {
+      this.setState(state => (
+        {contacts: state.contacts.concat([ contact ])}
+      ))
+      // see: the newContact has been added to the database. 
+      console.log(this.state);
+    })
+  }
+
   removeContact = (contact) => {
     this.setState( (prevState) => ({
       contacts: prevState.contacts.filter((contacts_old) => (
@@ -87,10 +102,24 @@ class App extends Component {
           {this.state.screenToShow==='Create Contact Page' && (
             <CreateContact />
           )}
-        */}
+        */} {/*
         <Route path="/create-contact"
                component={CreateContact}
-        />
+        />*/}
+
+        {/* Refactor component to specify render method so we can pass props for handling the New Contact Data*/}
+        <Route path="/create-contact" render={()=>(
+          <CreateContact
+            onCreateContact={(newContact) => {this.createContact(newContact)}
+          }/>
+        )}/>
+        {/* contact is what we Get BACK from CreateContact,
+              which is who calls this.createContact.
+            Although it looks like we are "sendinf" contact (which would be confusing because we have No contact variable here..!)
+          renaming to newContact, for clarification - avoid confusion, while I get accostomed to where is coming from
+        */}
+
+
 
         {/* NOTICE: Following onClick handler NO LONGER Works
               as ROUTE, NOT state.screenToShow,
