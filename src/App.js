@@ -92,13 +92,6 @@ class App extends Component {
                component={CreateContact}
         />
 
-        <style className="contact-details">
-          <h5> React Router is Awesome !</h5>
-          <p> Notice: the "Back Button" now works !</p>
-          <p> .. and so does typing in a url in the address bar :-)</p>
-          <br />  
-        </style>
-
         {/* NOTICE: Following onClick handler NO LONGER Works
               as ROUTE, NOT state.screenToShow,
               controlls what screens/components to RENDER
@@ -139,9 +132,12 @@ class App extends Component {
         {/* Since I want this button always visible, I left "path" parameter? off
             .. or I could have set path="/", and leave off "exact" param?
         */}
+
+        {/* Remove Home button now that Add Contact Page has been made
         <Route path="/" render={() => (
             <Link to="/"><button>Home Page</button></Link>
         )}/>
+        */}
 
      </div>
     );
