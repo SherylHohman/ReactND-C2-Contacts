@@ -9,7 +9,7 @@ class ListContacts extends Component {
   static propTypes = {
     contacts: PropTypes.array.isRequired,
     onDeleteContact: PropTypes.func.isRequired,
-    onAddContact: PropTypes.func  // temp
+    // onAddContact: PropTypes.func  // temp
   }
 
   // Search Bar <input> string.. to filter contacts list

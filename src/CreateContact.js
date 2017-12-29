@@ -12,7 +12,7 @@ const CreateContact = function(props) {
     e.preventDefault();
     // "serialize" the form data into an JS Object, so "we" can handle the processinf of this data
     const formData = serializeForm(e.target, {hash: true});
-    console.log(formData);
+    // console.log(formData);
     // if this method was given to us via props from parent (App) component..
     if (props.onCreateContact) {
       // call this function, giving it our new contact's data to process (calls API..)
