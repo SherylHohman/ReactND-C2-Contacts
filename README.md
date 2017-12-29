@@ -46,8 +46,70 @@ This is called a `class field`.
 
 Basically, `state` are variables that we want a specific React Component to manage, as these variables represent (changing) data that the Component will be rendering to the UI/screen.
 
+##### 6. PropTypes
 
-...
+`yarn add prop-types` or `npm install --save prop-types`
+
+###### Functional Component usage:
+
+```
+const myFunctionalComponent = function(props){
+  ...
+};
+
+myFunctionalComponent.propTypes = {
+  myArray:          PropTypes.array.isRequired,
+  myFunction:       PropTypes.func.isRequired,
+  myOptionalString: PropTypes.string
+} 
+```
+##### class based Component usage:
+```
+  static propTypes = {
+    myArray:          PropTypes.array.isRequired,
+    myFunction:       PropTypes.func.isRequired,
+    myOptionalString: PropTypes.string
+  }
+```
+
+Add the above code to the Component that is to receive a prop.
+  -- that's it!
+  `import PropTypes from prop-types`  // ok this needs to be at the head of the Component's file as well.
+
+Instructions on how to assign the appropriate `PropType` validator to each prop:
+  https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes  
+
+
+Notice the variable (property on our Function or Class) we're creating 
+- is `propTypes` (lower case 'p')  
+wherease the CLASS? assigned to its properties 
+- is `PropTypes` (upper case 'P')
+
+In *the finished* Contacts App, we have:
+
+ListContacts (Class based Component)
+```
+  static propTypes = {
+    contacts: PropTypes.array.isRequired,
+    onDeleteContact: PropTypes.func.isRequired,
+  }
+```
+Notice: this is *inside* the class definition, 
+- just below `Class ... Extends{`
+- above `state = {...}`
+
+CreateContacts (Functional Stateless Component)
+```
+CreateContact.propTypes = {
+  onCreateContact: PropTypes.func.isRequired
+};
+```
+Notice: this is *outside* the function definition - 
+- below the `CreateContact` function definition, 
+- above the `export` statement.
+
+
+### ...
 
 
 #### React LifeCycle Events
