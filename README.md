@@ -285,3 +285,31 @@ Our App saves the data, and adds it into our state.
 `const values = serializeForm(event.target, {hash:true})`
 To store the form data as an Object, use paramater `{hash:true}`
 
+#### `history`, `history.push`, and forcing a page "reload" - page change 
+
+Changing URL's programatically (in contrast to user initiated via <Link>)
+
+Load home page after new contact is added
+
+- L5_ReactRouter, 6.Finish the Contact Form, 
+    Vid-3: Update Server With New Contact
+
+<Route>'s property `render()` for CreateContact page/component
+  now takes in `history` object, that is a `prop` on <Route>.
+Now, that `history` object is accessible to it's child components,
+  <CreateContact> in our case.
+Since the component has access to it, it's props have access to `history`
+Namely, the `onCreateContact` property
+  which means I can access `history` inside the `onCreateContact` inline function
+`history.push("/")` pushes the home page url into the `history` object,
+  which updates App's state (or BrowserHistory state ?),
+  triggering an App re-render.
+At re-render, the last item in the history object becomes the 
+  "current URL" in the browser (in the App),
+Since we have effectively changed the URL, in this way, 
+  App Route components re-render, 
+  changing the screen/page to show "/" ListContacts screen
+..and since contacts has been updated, with the "newly created contact",
+  we see that it has successfully been added to the DB.
+
+
