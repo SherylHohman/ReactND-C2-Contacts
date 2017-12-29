@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ImageInput from './ImageInput';
 import serializeForm from 'form-serialize';
 
@@ -40,5 +41,8 @@ const CreateContact = function(props) {
   )
 };
 
+CreateContact.propTypes = {
+  onCreateContact: PropTypes.func.isRequired
+};
 
 export default CreateContact;
