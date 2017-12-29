@@ -1,16 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ImageInput from './ImageInput';
+import serializeForm from 'form-serialize';
 
 // create dummy "create contact" "screen" ie component.
 // at this time it does nothing but renter, so.. start with a
 //   a Functional Stateless Component
 
 const CreateContact = function(props) {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = serializeForm(e.target, {hash: true});
+    console.log(formData);
+  }
+
   return (
     <div>
       <Link to="/" className="close-create-contact">Back/CancelClose</Link>
-      <form className="create-contact-form">
+      <form onSubmit={handleSubmit} className="create-contact-form">
         <ImageInput
           className="create-contact-avatar-input"
           name="avatarURL"
