@@ -230,3 +230,58 @@ This piece is what makes the "Back Button" work !
 
 Route component decides which components are rendered based on the current URL path
 
+#### Serializing Form Data
+
+Native functionality of HTML Forms is that when the form Button is clicked,
+the Browser 
+  * takes the input paramaters from the `<input>` fields, and 
+  * encodes that data (aka "serializes the form"), 
+  * appends it to the current URL, 
+  * updates the URL in the browser address bar, and
+  * "sends" the resulting request back to the server, which also
+  * causes a page reload.
+
+In our case, our form has 3 input fields: avatarURL, name, email
+This is what `http://localhost:3000/create-contact` becomes after `Add Contact` is clicked
+`http://localhost:3000/create-contact?avatarURL=&name=Hello&email=myEmail@u.com`
+And then the page undergoes a fresh Page Reload from the Server.
+
+##### For SPA's we want to override this behaviour
+Prevent Default
+
+Prevents the Browser from taking over the form when it gets submitted.
+Lets us control that ourselves.
+
+We need to add an `onSubmit` handler to our `<form>` tag.
+add a "handler" method to the component that calls `preventDefault`
+
+```
+class CreateContact extends Component {
+    handleSubmit = (event) => {
+        e.preventDefault();
+       
+        // add custom form handling code here
+        ...
+            // (event.target is the form itself)
+    }
+
+    render() {
+        return{
+    
+            <form onSubmit={this.handleSubmit}>
+             ...   
+            </form>
+        }
+    }
+}
+```
+
+
+`form-serialize` package to Serialize the data ourselves, 
+  stored into a JS variable.  
+Use that serialized URL, and our contacts API, to communicate with our backend server, and store that data in our database.
+Our App saves the data, and adds it into our state.
+
+`const values = serializeForm(event.target, {hash:true})`
+To store the form data as an Object, use paramater `{hash:true}`
+
