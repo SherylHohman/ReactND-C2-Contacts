@@ -31,8 +31,8 @@ class App extends Component {
     ContactsAPI.create(contact).then(contact => {
       this.setState(state => (
         {contacts: state.contacts.concat([ contact ])}
-      ))
-      // see: the newContact has been added to the database. 
+      ));
+      // see: the newContact has been added to the database.
       console.log(this.state);
     })
   }
@@ -108,9 +108,13 @@ class App extends Component {
         />*/}
 
         {/* Refactor component to specify render method so we can pass props for handling the New Contact Data*/}
-        <Route path="/create-contact" render={()=>(
+        <Route path="/create-contact" render={( { history } )=>(
           <CreateContact
-            onCreateContact={(newContact) => {this.createContact(newContact)}
+            onCreateContact={(newContact) => {
+              this.createContact(newContact);
+              // return to home page: newContact is now in the contacts lis 
+              history.push('/');
+            }
           }/>
         )}/>
         {/* contact is what we Get BACK from CreateContact,
