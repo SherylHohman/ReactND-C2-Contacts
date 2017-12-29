@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ListContacts from './ListContacts';
 import CreateContact from './CreateContact';
 import * as ContactsAPI from './utils/ContactsAPI';
@@ -7,10 +8,10 @@ import * as ContactsAPI from './utils/ContactsAPI';
 class App extends Component {
 
   state = {
-    contacts : [],
-    // Temp: use 'state' to conditionally render page of Single Page App
-    // See switchScreenToShow() for valid values:
-    screenToShow: 'List Contacts Page'
+    contacts : []//,
+    // // Temp: use 'state' to conditionally render page of Single Page App
+    // // See switchScreenToShow() for valid values:
+    // screenToShow: 'List Contacts Page'
   }
 
   componentDidMount() {
@@ -31,25 +32,26 @@ class App extends Component {
     ContactsAPI.remove(contact);
   }
 
-  switchScreenToShow = () => {
-    const validScreens = ['List Contacts Page', 'Create Contact Page', 'create-contact'];
-    const curIndex = validScreens.indexOf(this.state.screenToShow);
-    // notice: if curIndex == -1, validScreens[0] will become the new page
+  // switchScreenToShow = () => {
+  //   // const validScreens = ['List Contacts Page', 'Create Contact Page', 'create-contact'];
+  //   const validScreens = ['/', 'create-contact', 'invalidUrl-404'];
+  //   const curIndex = validScreens.indexOf(this.state.screenToShow);
+  //   // notice: if curIndex == -1, validScreens[0] will become the new page
 
-    // cycle through all validScreens in order listed
-    const newIndex = (curIndex + 1) % validScreens.length;
-    const newScreen = validScreens[newIndex];
-    this.setState({screenToShow: newScreen})
-    // added when implemented <Route>, so we can see that 'Switch Page'
-    //    *does* still change state.screenToShow, even though
-    //    screenToShow NO Longer Determines what page Components to Render.
-    //    .. that's controlled by the URL via Router, which now "owns" these
-    //      "child" components.  Note, <button> itself always renders, as it's
-    //      "IN" <App /> render method.  but
-    //      "OUTSIDE" all <App/>'s <Router> components
-    //  WE don't fmanually control the URL "state" <BrowserRouter> Does.
-    console.log(this.state.screenToShow);
-  };
+  //   // cycle through all validScreens in order listed
+  //   const newIndex = (curIndex + 1) % validScreens.length;
+  //   const newScreen = validScreens[newIndex];
+  //   this.setState({screenToShow: newScreen})
+  //   // added when implemented <Route>, so we can see that 'Switch Page'
+  //   //    *does* still change state.screenToShow, even though
+  //   //    screenToShow NO Longer Determines what page Components to Render.
+  //   //    .. that's controlled by the URL via Router, which now "owns" these
+  //   //      "child" components.  Note, <button> itself always renders, as it's
+  //   //      "IN" <App /> render method.  but
+  //   //      "OUTSIDE" all <App/>'s <Router> components
+  //   //  WE don't fmanually control the URL "state" <BrowserRouter> Does.
+  //   console.log(this.state.screenToShow);
+  // };
 
   render() {
     return (
@@ -90,6 +92,13 @@ class App extends Component {
                component={CreateContact}
         />
 
+        <style className="contact-details">
+          <h5> React Router is Awesome !</h5>
+          <p> Notice: the "Back Button" now works !</p>
+          <p> .. and so does typing in a url in the address bar :-)</p>
+          <br />  
+        </style>
+
         {/* NOTICE: Following onClick handler NO LONGER Works
               as ROUTE, NOT state.screenToShow,
               controlls what screens/components to RENDER
@@ -112,9 +121,27 @@ class App extends Component {
               Yes! - this functionality is NO longer NEEDED.  It's for Learning and Comphrehension purposes. So I can Viserally See how the code *would* translate.
         */}
         {/* button to auto swap which "page" user sees */}
-        <button onClick={()=>this.switchScreenToShow()}>Switch Pages</button>
+        {/* <button onClick={()=>this.switchScreenToShow()}>Switch Pages</button> */}
         {/*
         */}
+
+        {/* Note, this does not have the same "cyclic" functionality as
+              The Previous Button I had.
+            I had Trouble getting the current
+              "pathname" (history, location, context, or whatever
+              into my new onclick handler for that button.
+            Abandoned after a day of no success.
+            Look at branch L5_ReactRouter_issue_cantRef_pathname_in_clickHandler
+            to see the abandoned code, remenants of many attempts,
+            and comments about it.  Lot's of code there is commented out.
+        */}
+        {/* This version is simplified: adds a button for the home page only*/}
+        {/* Since I want this button always visible, I left "path" parameter? off
+            .. or I could have set path="/", and leave off "exact" param?
+        */}
+        <Route path="/" render={() => (
+            <Link to="/"><button>Home Page</button></Link>
+        )}/>
 
      </div>
     );
