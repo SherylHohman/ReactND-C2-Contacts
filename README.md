@@ -164,4 +164,69 @@ Passing a to prop to your link, for example, helps guide your users to an absolu
 Since the `<Link>` component fully renders a proper anchor tag (`<a>`) with the appropriate `href`, you can expect it to behave how a normal link on the web behaves.  
 
 
+##### Route Component
+
+`<Route>` renders some UI, **if** its URL matches the App's new URL.  
+    - in this way, it removes the need for conditional rendering that *we* had in our implementation of component rendering based on 'state`
+    - it aslo (obviously) removes teh need for a state variable, as it uses the `path="/myPageURL"` instead of `state.screenToShow`
+    - `render={() => (<myPageComponent prop1="prop1" prop2="prop2" />)}`
+      replaces the need for "conditional rendering" syntax to indicate what components are to be rendered
+      - Notice: **Component JSX** is used here: `<myPageComponent .../>` vs `{myPageComponent}`
+    - if there is only 1 component to be rendered, and it needs NO props,      `component={myPageComponent}` property/attribute can be used instead of    `render`
+      - Notice: just the *name** of the component, ***NOT the Component JSX*** is used in this case: **{myPageComponent}** vs `<myPageComponent/>`
+
+`<Route>` component PROPS 
+    - path="" the url/page/webpage this Route "responds to"
+    - component={} the component that this Route Renders 
+      * (use this attribute *ONLY* IF NO PROPS are to be passed to the component)
+    - render={() => ()} if the Component(s) need to pass PROPS
+      * (Must use this attribute instead, have more than 1 component to render, and/or need to pass PROPS to the component/page/view)
+      * Can always use this attribute/syntax instead of the simplifed component= attribute.
+
+For example:
+
+- syntax: NO props are passed to `CreateContact` component 
+- (and only 1 component)
+`<Route path="/create" component={CreateContact}/>`  
+
+- syntax: props ARE passed to `ListContacts` component 
+- (and/or more than 1 component)
+```
+ <Route exact path="/" render={() => (
+    <ListContacts
+      contacts={this.state.contacts}
+      onDeleteContact={this.removeContact}
+    )}/>
+```
+- syntax (probably) if more than one component is rendered
+
+This essentially performs the same task that we Manually did earlier, when we used `state` (I named it `state.screenToShow`).
+
+But, instead of managing and checking against a `state` variable, it uses `the url`.  I believe `<BrowserRouter>` is in charge of controlling/updating (?and storing?) the current `url`.  
+
+`history` probably has something to do with this as well.
+
+`<Route>` is the piece that makes the <kbd>Back</kbd> Button Work !!
+
+NOTE: `path='/some-path'` *will match on Partial Matches*  property of the current'url'  
+use `exact` (property/ qualifier / paramater / prop) to force a *Match* only the exact url.
+
+For example, if the current page URL is `/help` 
+(in the browser address bar for the page that's to be displayed),
+and we have the following Routes defined:
+ - `<Route path="/">`     (Components for "/" url are controlled/rendered by this Route)
+ - `<Route path="/help">` (Components for "/help" url are controlled/rendered by this Route)
+ - 
+then Both Routes are either *Partial* or *exact* matches to the current URL.
+So, All Components *from Both Routes* are *rendered*!  
+  ie: both "pages" would render, one below the other, 
+(assuming we're talking about an SPA, where each Route renders components for a specific "page")
+
+
+
+If the route matches a URL, React will Render some UI
+
+This piece is what makes the "Back Button" work !
+
+Route component decides which components are rendered based on the current URL path
 
