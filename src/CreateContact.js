@@ -4,18 +4,20 @@ import PropTypes from 'prop-types';
 import ImageInput from './ImageInput';
 import serializeForm from 'form-serialize';
 
-// Functional Stateless Component:
-//  only uses render() method, and has no state
-
 const CreateContact = function(props) {
 
   const handleSubmit = (e) => {
-    // don't let Browser take over handling of the <form>'s <input> data
+
+    //  Prevent Browser from taking over and sending form data to the server.
+    //    we want to control how the data is processed
+    //    .. and that is defined in the rest of this function.
     e.preventDefault();
-    // "serialize" the form data into an JS Object, so "we" can handle the processinf of this data
+
+    // "serialize" the form data into an JS Object,
+    //    so "we" can handle the processing of this data (API can send it as JSON)
     const formData = serializeForm(e.target, {hash: true});
-    // console.log(formData);
-    // if this method was given to us via props from parent (App) component..
+
+    // verify this method was given to us via props from parent (App) component..
     if (props.onCreateContact) {
       // call this function, giving it our new contact's data to process (calls API..)
       props.onCreateContact(formData);
